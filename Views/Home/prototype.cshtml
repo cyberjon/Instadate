@@ -1,0 +1,152 @@
+﻿
+@{
+    
+}
+
+<div class="col-xs-12">
+    <h2>Documentation</h2>
+
+
+    <p>
+
+        User accounts: <br />
+        Login: Felix Password: password <br />
+        Login: Mario Password: password <br />
+
+
+
+
+        Our application will generate revenue through minimal advertisement and paid users. Our application is different from competitors because we implement
+        an instant date feature which helps match the user with at a time which conveniences them.
+        <br />
+        <h3>Alternatives:</h3>
+        <ul>
+            <li>POF.com</li>
+            <li>Match.com</li>
+            <li>OKCupid.com</li>
+            <li>ChristianMingle.com</li>
+        </ul>
+    </p>
+
+<pre>
+    -- Create a database named DatingDB and use this script to build it.
+    DROP TABLE Availability;
+    DROP TABLE ClientInterest;
+    DROP TABLE Client;
+    DROP TABLE Interest;
+    DROP TABLE Location;
+    GO
+    CREATE TABLE Location
+    (
+    locationID INTEGER PRIMARY KEY IDENTITY(1,1),
+    city VARCHAR(20),
+    province VARCHAR(20),
+    country VARCHAR(20),
+    )
+    INSERT INTO Location VALUES ('Richmond', 'BC', 'Canada');
+    INSERT INTO LOcation VALUES ( 'Vancouver', 'BC', 'Canada');
+    INSERT INTO LOcation VALUES ( 'Burnaby', 'BC', 'Canada');
+    GO
+    CREATE TABLE Client(
+    email VARCHAR(255),
+    userName VARCHAR(50),
+    birthdate DATE,
+    gender VARCHAR(20),
+    locationID INT,
+    availableDate DATE NULL,
+    PRIMARY KEY(userName),
+    CHECK(  gender IN ('male', 'female')),
+    FOREIGN KEY (locationID) REFERENCES Location(locationID)
+    );
+    GO
+    INSERT INTO Client (email, userName, birthdate, gender, locationID) VALUES ('Appleby@gmail.com','Appleby', '1990-01-01', 'female',1);
+    INSERT INTO Client (email, userName, birthdate, gender, locationID) VALUES ('Barr@gmail.com','Barr', '1990-01-01', 'male', 2);
+    INSERT INTO Client (email, userName, birthdate, gender, locationID) VALUES ('Steve@gmail.com','Steve','1990-01-01',  'male', 2);
+    INSERT INTO Client (email, userName, birthdate, gender, locationID) VALUES ('John@hotmail.com','John','1990-01-01', 'male', 3);
+    INSERT INTO Client (email, userName, birthdate, gender, locationID) VALUES ('Mary@hotmail.com','Mary','1990-01-01', 'female', 1);
+    INSERT INTO Client (email, userName, birthdate, gender, locationID) VALUES ('Linda@hotmail.com','Linda','1990-01-01', 'female', 1);
+    CREATE TABLE Availability(
+    availableDate DATE,
+    timeStart TIME,
+    timeEnd TIME,
+    locationID INT,
+    username VARCHAR(50),
+    FOREIGN KEY (userName) REFERENCES Client(userName),
+    FOREIGN KEY (locationID) REFERENCES Client(locationID)
+    );
+    GO
+    GO
+    CREATE TABLE Interest
+    (
+    interest VARCHAR (20),
+    PRIMARY KEY(interest)
+    )
+    INSERT INTO Interest VALUES('Movie');
+    INSERT INTO Interest VALUES('Sports');
+    INSERT INTO Interest VALUES('Travel');
+    INSERT INTO Interest VALUES('Reading');
+    INSERT INTO Interest VALUES('Food');
+    INSERT INTO Interest VALUES('Game');
+    GO
+    CREATE TABLE ClientInterest
+    (
+    userName VARCHAR(50) FOREIGN KEY REFERENCES Client(userName),
+    interest VARCHAR(20) FOREIGN KEY REFERENCES Interest(interest),
+    PRIMARY KEY(userName, interest)
+    )
+    INSERT INTO ClientInterest VALUES('Appleby','Movie');
+    INSERT INTO ClientInterest VALUES('Appleby','Sports');
+    INSERT INTO ClientInterest VALUES('Appleby','Food');
+    INSERT INTO ClientInterest VALUES('Barr', 'Movie')
+    INSERT INTO ClientInterest VALUES('Barr', 'Travel');
+    INSERT INTO ClientInterest VALUES('Barr', 'Game');
+    INSERT INTO ClientInterest VALUES('Mary', 'Game');
+    INSERT INTO ClientInterest VALUES('Mary', 'Reading');
+    INSERT INTO ClientInterest VALUES('Mary', 'Movie');
+    INSERT INTO ClientInterest VALUES('John', 'Movie');
+    INSERT INTO ClientInterest VALUES('John', 'Sports');
+    INSERT INTO ClientInterest VALUES('John', 'Game');
+    INSERT INTO ClientInterest VALUES('Steve', 'travel');
+    INSERT INTO ClientInterest VALUES('Steve', 'food');
+    INSERT INTO ClientInterest VALUES('Steve', 'Reading');
+    INSERT INTO ClientInterest VALUES('Linda', 'Reading');
+    INSERT INTO ClientInterest VALUES('Linda', 'Food');
+    INSERT INTO ClientInterest VALUES('Linda', 'Travel');
+    GO
+    SELECT * FROM Client;
+    SELECT * FROM Location;
+    SELECT * FROM Interest;
+    SELECT * FROM ClientInterest;
+    GO
+</pre>
+    <img src="~/Images/DatabasePNG.PNG" style="width:80%" />
+    <img src="~/Images/DatingERD.PNG" alt="ERD" />
+    <img src="~/Images/use_case.PNG" alt="USECASE" />
+
+    <h1>Essential/Non essential requirements</h1>
+<pre>
+    Essential: 
+-	User login
+-	user profile
+-	user search 
+-	messaging service - like each other before users are able to message each other
+-	Managing availability
+-	random date search (Find an instant date based on location and time available)
+-   Delete profile
+Important: 
+-	Location detection (filter search by location, 
+-	unlike a user (for harassment or other reasons),
+-	profile pictures (6 pictures on profile), 
+-	user verification (verify age and location),
+-	follow people to see their updates
+-	paid user account - Ad free, have higher search priority, more profile pictures
+Nice to have: 
+       -      Gifts 
+Non-essential:
+-    Ease of use with simple user interface
+-    simple logo, pink, blue, and white colour scheme
+-    ASP.NET, SQLServer, Windows, Mobile responsiveness
+</pre>
+
+</div>
+

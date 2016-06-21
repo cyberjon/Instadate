@@ -1,0 +1,80 @@
+﻿@model IEnumerable<WebApplication9.ViewModels.ClientDetailInfo>
+@{
+    ViewBag.Title = "foundDates";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>foundDates</title>
+</head>
+<body>
+
+    <div class="col-xs-12">
+        
+
+        <h4 class="foundDateTitle" style="margin-top:10px;margin-top: 50px;border-bottom: 1px solid #ddd;padding-bottom: 10px;margin-bottom: 20px;">Date available on:  @ViewBag.date </h4>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-xs-6 col-sm-4 col-md-3">
+                    <div class="thumbnail">
+                        <a href="~/Home/UserProfile/?UserName=@item.client.UserName">
+                            @if (item.client.profile != null)
+                            {
+                                <img src="~/Images/Uploads/UserProfile/@item.client.profile" class="img-responsive" style="width:100%; height:178px">
+                            }
+                            else if (item.client.gender == "male")
+                            {
+
+                                <img src="~/Images/Uploads/UserProfile/default-profile-male.jpg" style="width:100%; height:178px">
+
+
+
+
+                            }
+                            else {
+                                <img src="~/Images/Uploads/UserProfile/default-profile-female.jpg" style="width:100%; height:178px">}
+
+                        </a>
+                        <div class="caption">
+                            <h4>@item.client.UserName</h4>
+                            <h4>@item.client.gender</h4>
+
+
+
+                            @{
+                                var date = DateTime.Now.Date.Subtract((DateTime)item.client.birthdate);
+                                int year = (int)date.TotalDays / 365;
+
+                                <h4>@year</h4>
+                                
+                                if (item.interests != null)
+                                {
+                                    foreach (var interest in item.interests)
+                                    {
+                                        <span style="margin:10px 0;font-size:16px">@interest</span>
+                                    }
+                                }
+                                <div style="display: none;" class="latLng">@item.client.latitude,@item.client.longitude </div>
+                                <div class="distance"> </div>
+                                <p style="margin-top:20px"><a href="~/Home/UserProfile/?UserName=@item.client.UserName" class="btn btn-info btn-sm">Quick View</a></p>
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                                }
+        </div>
+
+
+
+    </div>
+
+</body>
+</html>
+<script src="https://maps.googleapis.com/maps/api/js?signed_in=true"></script>
+<script src="~/Scripts/app.js"></script>

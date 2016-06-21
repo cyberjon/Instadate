@@ -1,0 +1,97 @@
+﻿
+body{
+    padding:20px;
+}
+
+.title{
+    font-size:30px;
+    font-weight:bold;
+    font-family:'Lobster 1.4';
+}
+
+.chat-room-body{
+    margin-bottom:15px;
+}
+
+.conversation-outer-container{
+    border:1px solid #ddd;
+    border-radius:4px 4px 0 0;
+    padding-bottom:150px
+} 
+
+ul#conversation-container {
+    padding: 0; 
+}
+
+ul li{
+    list-style:none;
+}
+
+li.receive {
+  margin-right: 30px;
+  background-color: #ffe6e6;
+}
+
+
+li.send {
+   margin-left: 30px;
+   background-color: #e6f3ff;
+}
+
+
+ul#conversation-container li {
+    list-style: none;
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin-top: 15px;
+    border-radius: 3px;
+}
+
+#instant-message{
+    border:1px solid #ddd;
+    padding-left:0px;
+    height:40px;
+   
+}
+
+#sendMessage{
+    height:40px;
+}
+
+.hidden{
+    display:none;
+}
+.fa-lock,.fa-unlock{
+    margin-right:15px;
+}
+
+.start_a_conversation{
+    margin-top:20px;
+}
+
+/*-- inputDiv --*/
+.inputDiv{
+    height:40px;
+    padding:0px; 
+    border:1px solid #ddd
+}
+
+/*--emoji */
+.emoji{
+    height:40px;
+}
+
+#emoji-container{
+    display:none;
+    margin-left:15px;
+}
+
+#emoji-container .emoji-face{
+    cursor:pointer;
+}
+
+ .emoji-face{
+     width:18px;
+     height:18px;
+     margin:3px;
+ }

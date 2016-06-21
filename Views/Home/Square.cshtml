@@ -1,0 +1,234 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<WebApplication9.ViewModels.ClientDetailInfo>
+
+
+@{
+    ViewBag.Title = "Square";
+}
+
+
+
+@{
+    var searchString = "";
+    var interestString = "";
+    var genderString = "";
+    var sortOrder = "";
+    var UserName = User.Identity.Name;
+
+    if (ViewBag.CurrentSearchString != null)
+    {
+        searchString = ViewBag.CurrentSearchString;
+    }
+
+    if (ViewBag.CurrentSortOrder!=null)
+    {
+        sortOrder = ViewBag.CurrentSortOrder;
+    }
+
+    if (ViewBag.CurrentGenderString != null)
+    {
+        genderString = ViewBag.CurrentGenderString;
+    }
+
+    if (ViewBag.CurrentInterestString != null)
+    {
+        interestString = ViewBag.CurrentInterestString;
+    }
+
+}
+
+    <div class="col-md-10 col-md-offset-1 w3-margin-top">
+        <div class="page-header">
+
+            @{ 
+                var province = "";
+
+                if (ViewBag.Province != null)
+                {
+                    province = ViewBag.Province;
+                }
+            }
+            
+
+            <h1 style="font-family: Lobster; font-style: italic;"><small>People in @province </small></h1>
+        </div>
+
+        <!--Sort, filter button groups-->
+        <div class="col-md-12" style="margin-bottom: 20px;padding-left: 0px;padding-right: 0px;">
+            <!--Select gender-->
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                    @{
+                        if (genderString != "")
+                        {                            
+                            <span>@genderString</span>
+                        }
+                        else
+                        {
+                            <span>All</span>
+                        }
+
+                    }   <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="~/Home/Square/?UserName=@UserName&interestString=@interestString&sortOrder=@sortOrder">All</a></li>
+                    <li><a href="~/Home/Square/?UserName=@UserName&interestString=@interestString&genderString=male&sortOrder=@sortOrder">Male</a></li>
+                    <li><a href="~/Home/Square/?UserName=@UserName&interestString=@interestString&genderString=female&sortOrder=@sortOrder">Female</a></li>
+                </ul>
+            </div>
+
+           
+            <!--filt by interest-->
+            <div class="btn-group">              
+                <button type="button" class="btn btn-default">            
+                    @{
+                        if (interestString != "")
+                        {
+                            <span>@interestString</span>
+                        }
+                        else
+                        {
+                            <span>All interest</span>
+                        }
+                    }         
+                </button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="~/Home/Square/?UserName=@UserName&genderString=@genderString&sortOrder=@sortOrder">All interest</a></li>
+                    @foreach (var interest in ViewBag.interests)
+                    {
+                        <li><a href="~/Home/Square/?UserName=@UserName&interestString=@interest.interest1&genderString=@genderString&sortOrder=@sortOrder">@interest.interest1</a></li>
+                    }
+                </ul>
+            </div>
+        
+         <!--search a user-->
+            <div class="col-md-3 col-sm-3 col-xs-3" style="float:right; padding-right:0px">
+                <form method="post" action="~/Home/Square">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for a user" name="searchString" value="@searchString">
+                        <input type="text" class="form-control" placeholder="Search for a user" name="UserName" value="@UserName" style="display:none">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+
+
+            <!-- sort button-->
+            <div class="dropdown" style="float:right" >
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    @{
+                        if (sortOrder != "")
+                        {
+                            if (sortOrder == "Name")
+                            {
+                                <span>Name</span>
+
+                            }
+                            else if (sortOrder == "Age")
+                            {
+                                <span>Age:old to young</span>
+                            }
+                            else
+                            {
+                                <span>Age:young to old</span>
+                            }
+                        }
+                        else
+                        {
+                            <span>Name</span>
+                        }
+
+                    }
+                    
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="~/Home/Square/?UserName=@UserName&interestString=@interestString&genderString=@genderString&sortOrder=Name">Name</a></li>
+                    <li><a href="~/Home/Square/?UserName=@UserName&interestString=@interestString&genderString=@genderString&sortOrder=Age_Desc">Age:young-old</a></li>
+                    <li><a href="~/Home/Square/?UserName=@UserName&interestString=@interestString&genderString=@genderString&sortOrder=Age">Age:old-young</a></li>
+
+                </ul>
+            </div>       
+        </div>
+
+       
+        <!-- clients table-->
+        <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-xs-6 col-sm-4 col-md-3">
+                        <div class="thumbnail">
+                            <a href="~/Home/UserProfile/?UserName=@item.client.UserName">
+                            @if (item.client.profile != null){
+                                <img src="~/Images/Uploads/UserProfile/@item.client.profile" class="img-responsive" style="width:100%; height:178px">
+                            }
+                            else if(item.client.gender=="male"){
+                                <img src="~/Images/Uploads/UserProfile/default-profile-male.jpg"  style="width:100%; height:178px">
+                            }
+                            else {
+                                <img src="~/Images/Uploads/UserProfile/default-profile-female.jpg" style="width:100%; height:178px">}
+                            </a>
+
+
+                            <div class="caption">
+                                @{ 
+                                    var date = DateTime.Now.Date.Subtract((DateTime)item.client.birthdate);
+                                    int year = (int)date.TotalDays / 365;
+                                }
+                                <div class="square"><span class="username">@item.client.UserName</span><span class="age-square">@year</span></div>
+                                
+                                <div style="display: none;" class="latLng">@item.client.latitude,@item.client.longitude </div>
+                                <div class="distance"> </div>
+                                @{
+                                   
+
+                                    
+                                   
+
+
+                                    @*if (item.client.RoleId != null)
+                                    {
+
+                                        <p>Paid User</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Normal users</p>
+                                    }*@
+
+                                    <i class="fa fa-tags"></i>
+                                    if (item.interests != null)
+                                    {
+                                        foreach (var interest in item.interests)
+                                        {
+                                        <span>@interest</span>
+                                        }
+                                 
+                                    }
+
+
+                                }
+                                <p><a href="~/Home/UserProfile/?UserName=@item.client.UserName" class="btn btn-info btn-sm" style="margin-top:10px">View <i class="fa fa-angle-double-right"></i></a></p>
+                            </div>
+                        </div>
+                    </div>
+                                   }
+        </div>
+
+</div>
+
+
+
+<div class="paginationList col-md-10 col-md-offset-1">
+    @Html.PagedListPager(Model, page => Url.Action("Square", new { page,UserName= ViewBag.UserName,searchString = ViewBag.CurrentSearchString, interestString = ViewBag.CurrentInterestString, genderString = ViewBag.CurrentGenderString, sortOrder = ViewBag.CurrentSortOrder })
+    )
+</div>
+<script src="~/Scripts/app.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?signed_in=true"></script>

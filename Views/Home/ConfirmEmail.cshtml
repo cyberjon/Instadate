@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "ConfirmEmail";
+}
+
+<div class="w3-margin w3-padding-medium">
+    @if (ViewBag.Message != null)
+    {
+
+        if (ViewBag.Message.Contains("registered"))
+        {
+            <p id="success">Hello, @ViewBag.UserName @ViewBag.Message , <span>if your browser does not redirect you to your profile page. Please click  to <a href="~/Home/UserProfile?userName=@ViewBag.UserName">here</a> to view your profile.</span></p>
+        }
+        else
+        {
+            <p>@ViewBag.Message</p>
+        }
+
+    }
+
+</div>
+
+<script>
+    window.setTimeout(function () {
+        location.href = document.getElementById("success").getElementsByTagName("a")[0].href;
+    }, 2000);
+
+</script>

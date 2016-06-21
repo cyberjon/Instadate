@@ -1,0 +1,537 @@
+
+ @import url(https://fonts.googleapis.com/css?family=Lobster+Two:400,700,400italic,700italic);
+ @import url(https://fonts.googleapis.com/css?family=Lato:400,100,300,700);
+
+
+
+
+html, body, #index{
+    height:100%!important;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+ }
+
+ .userName{
+      font-family:Lato!important;
+     font-size:32px
+ }
+.navbar{
+    margin-bottom:0!important;
+}
+
+.navbar-brand{
+    font-family: 'Lobster Two' !important;
+    font-weight:400;       
+}
+
+.wrapper{
+    padding:0px!important;
+  
+    overflow:auto;
+
+  
+}
+
+
+ /*--login --*/
+ #index{
+     background-image: url("../Images/LoginBg.jpg")!important;
+     background-repeat:no-repeat;
+     background-size:cover;
+     height:100%!important;
+
+
+
+    
+
+
+ }
+
+.loginBtn{
+   width:100%
+}
+
+.loginBox {
+    background-color: #fff;
+    box-shadow: 0 0 225px rgba(255,255,255,.55);
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    display: block;
+    margin-top:40px
+}
+
+.loginBox h1 {
+     font-family: 'Lobster Two' !important;
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: .8;
+    padding: 20px 0 10px 0;
+    text-align:center
+}
+
+.login-wrapper {
+    padding-bottom: 20px;
+}
+
+
+/*register*/
+.registerBox{
+    margin-top:50px
+
+}
+
+.registerBox h1 {
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 300;
+    padding: 0;
+    margin-bottom: 24px;
+}
+
+.registerBox .btn-info {
+    width: 100%;
+}
+
+
+/*---profile---*/
+.profile{
+    padding:0px!important;
+    margin:0px!important;
+}
+
+.profileHeaderImg.col-md-12{
+    padding:0px!important;
+   margin:0px!important;
+}
+.profileHeaderImg img{
+    height:360px!important;
+    width:100%;
+
+}
+
+.profileImg img{
+    height:200px!important;
+    width:200px!important;
+
+}
+
+.about{
+    font-family:"Lato"!important;
+    font-weight:100!important;
+    font-size:50px!important;
+    text-align:center;
+
+}
+
+
+/*-------footer*/
+#footer{
+    clear:both!important;
+    text-align:center;
+  
+    height:inherit
+}
+
+
+
+
+
+/*-alert center--*/
+.alterCenterHeader{
+    text-align: center;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.alertCenter li{
+    padding-left:15px;
+    width:300px;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    margin-bottom: 15px;
+}
+
+.alertCenter .btn-info {
+    margin: 5px 10px!important;
+    width: 100px!important;
+    display:inline-block;
+}
+
+.alertCenter li span{
+    padding-left: 15px;
+}
+
+.alertCenter .btn-default {
+    width: 100px!important;
+    display:inline-block;
+}
+
+.fa-comment{
+    margin-right:10px;
+}
+
+a.btn.btn-info.start_a_conversation{
+    position:relative;
+    padding-left:30px;
+}
+
+.start_a_conversation i.material-icons{
+    position:absolute;
+    left:3px;
+}
+
+
+.onlineStatus{
+    margin-left: 15px;
+}
+
+
+
+/*--squre page*/
+span.username {
+    font-size: 22px;
+    margin-right: 15px;
+}
+
+span.age-square{
+    font-size: 17px;
+}
+
+.location-square{
+    font-size:16px;
+    margin:8px 0
+}
+
+
+/*--nav*/
+.square-link{
+    position:relative;
+    padding-left:15px;
+}
+
+.square-link a{
+    padding-left:20px!important;
+}
+.square-link .material-icons{
+    position:absolute;
+    font-size:18px;
+    left:0px;
+    line-height:20px;
+}
+
+/* remove alert-center-header hover color*/
+a.alterCenterHeader:hover {
+    background-color: #fff!important;
+    color: #333!important;
+}
+
+
+/*-- user profile message box--*/
+#commentBoxInside{
+    margin-bottom:10px;
+}
+
+i.material-icons.commentIcon{
+    font-size: 40px!important;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 5px;
+   color: #5BC0DE;
+}
+
+.message-button-group{
+    padding-left:15px;
+}
+
+.commentP{
+    padding-left:15px;
+
+}
+
+.commentBoxOuter img, .view-per-message-container img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+
+/*-- view messages container--*/
+.view-messages-container{
+    margin-bottom:20px;
+    padding:20px 0!important;
+    border-radius:4px;
+    border:1px solid #ddd;
+}
+
+.view-messages-container-header{
+    margin-top:30px;
+    margin-bottom: 10px;
+    padding-left:0px!important;
+    display: inline-block;
+    font-size:20px;
+  
+    font-family:"Lobster 1.4";
+   
+}
+
+.view-per-message-container{
+    padding-left:0px; 
+    border-radius: 4px;
+    margin-bottom:30px;
+}
+
+.view-per-message-sender{
+    padding-left:23px;
+    margin-bottom: 10px;
+}
+
+.view-per-message-sender span{
+    background-color: #ff78bb;
+}
+
+.view-per-message-post-time{
+     margin-bottom: 10px;
+}
+
+.view-per-message-delete{
+     margin-bottom: 10px;
+     color:#333
+}
+
+.view-per-message-delete a{
+    cursor:pointer;
+     color:#333;
+}
+
+#view-message-per-page{
+    padding-left:0px;
+}
+
+/*--leave-message-container--*/
+
+.leave-message-container{
+    margin-top: 20px;
+    padding-left: 0;
+}
+
+.leave-message-header{
+   margin-bottom: 10px;
+   display: inline-block;
+}
+
+/*--leave a message button*/
+.leave-message-button{
+    padding-left: 30px;
+    padding-right: 30px;
+    position:relative;
+    margin-bottom:20px;
+    background-color: #FF78BB;
+    color: #fff;
+}
+
+.leave-message-button .material-icons{
+    position:absolute;
+    left:4px;
+    line-height:20px;
+}
+
+
+/*-- update button --*/
+.update-button{
+    position: relative;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.update-button .material-icons{
+    position: absolute;
+    left: 25px;
+    line-height: 19px;
+    font-size: 18px;
+}
+
+
+/*--nav profile link*/
+
+.nav-profile-link{
+    padding: 7px 15px!important;
+    border: 0px!important;
+}
+
+.nav-profile-img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer
+}
+
+
+.nav-profile-icon{
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 5px;
+    color: #5BC0DE;
+    background-color: white;
+    font-size:30px;
+    cursor:pointer;
+}
+
+
+
+/*-- user activity images --*/
+.user-activity-container{
+    padding:0px;
+    margin-top:30px;
+}
+
+.user-activity-container-header{
+    font-size:20px;
+    font-family:"Lobster 1.4";
+    padding-left:0px;
+    margin-bottom:10px;
+}
+.user-per-activity{
+    border:1px solid #ddd;
+    padding:40px 15px;
+    margin-top: 1px;
+    position:relative;
+
+}
+
+.user-per-activity-date{
+    border: 1px solid #ddd;
+    padding: 1px 15px;
+    position:absolute;
+    left: -60px;
+    top: -20px;
+    background: white;
+}
+
+.user-per-activity-date .day{
+    margin-left: 10px;
+    color: #FF3333;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.user-per-activity-title{
+   margin-bottom: 20px;
+    margin-top: 50px;
+    font-family:"Lobster 1.4"
+}
+
+.user-per-activity-large-image-container{
+margin-top:30px;
+cursor:pointer;
+}
+
+#view-activity-images-pag-nav{
+    padding-left:15px;
+}
+
+.delete-per-image-link{
+    display:none;
+}
+
+.delete-per-image-link .fa.fa-trash-o{
+  margin-top:10px;
+}
+
+.delete-per-image-link a{
+    color:#333;    
+}
+
+.delete-images-toggle-button{
+    position:absolute;
+    right: 5px;
+    top: 10px;
+    font-size: 18px;
+    cursor:pointer;
+}
+
+.user-activity-per-image{
+    cursor:pointer;
+}
+
+
+/*-- uploadActivityError --*/
+.uploadActivityError{
+    margin-top:20px;
+}
+
+
+/*-- change backgrund button*/
+.change-background-container{
+    position: absolute;
+    top: 320px;
+    right: 10px;
+    font-size: 10px;
+    display:none;
+}
+
+.change-background-container a{
+    font-size:10px;
+}
+
+
+/*--change cover modal --*/
+.per-cover-img-container{
+    position:relative;
+    margin-bottom:100px;
+}
+
+.per-cover-img-container .material-icons{
+    position:absolute;
+    top: 25px;
+    left: 90px;
+    color: black;
+    display:none;
+}
+
+
+.change-cover-modal-footer{
+    clear: both;
+    margin-top: 150px;
+}
+
+
+/*---user-activity-upload-header*/
+.user-activity-images-header{
+    font-family:'Lobster 1.4';
+    font-size:20px;
+    padding-left:0px!important;
+    margin-top:30px;
+} 
+
+.user-activity-images-header span{
+    font-size:12px;
+    margin-left:20px;
+}
+
+
+
+div#loadMessage .col-xs-12{
+    padding:0px;
+}
+
+#view-activity-images-pag-nav{
+    padding-left:0px;
+}
+
+
+footer{
+    height:50px;
+    border-top:1px solid #ddd;
+  
+}
+
+footer p{
+    padding-top:25px;
+    text-align:center;
+}

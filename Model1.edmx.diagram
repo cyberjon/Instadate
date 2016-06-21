@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3bb51a9d9b2a4c559b5ceb4e6080747a" Name="Diagram1" ZoomLevel="94">
+        <EntityTypeShape EntityType="SSDDatingModel.C__MigrationHistory" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSDDatingModel.AspNetRole" Width="1.5" PointX="6.875" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSDDatingModel.AspNetUserClaim" Width="1.5" PointX="5.625" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSDDatingModel.AspNetUserLogin" Width="1.5" PointX="7.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSDDatingModel.AspNetUserRole" Width="1.5" PointX="9.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSDDatingModel.AspNetUser" Width="1.5" PointX="3.625" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSDDatingModel.sysdiagram" Width="1.5" PointX="13" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSDDatingModel.Client" Width="1.5" PointX="11.125" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSDDatingModel.ClientInterest" Width="1.5" PointX="8.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSDDatingModel.Interest" Width="1.5" PointX="7.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSDDatingModel.UserActivityImage" Width="1.5" PointX="14.625" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSDDatingModel.UserMessage" Width="1.5" PointX="13" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="SSDDatingModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" ManuallyRouted="false" />
+        <AssociationConnector Association="SSDDatingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="SSDDatingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="SSDDatingModel.clientFk" ManuallyRouted="false" />
+        <AssociationConnector Association="SSDDatingModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="SSDDatingModel.FK__UserActiv__userN__66161CA2" ManuallyRouted="false" />
+        <AssociationConnector Association="SSDDatingModel.FK__UserMessa__recei__57C7FD4B" ManuallyRouted="false" />
+        <AssociationConnector Association="SSDDatingModel.FK__UserMessa__sende__56D3D912" ManuallyRouted="false" />
+        <AssociationConnector Association="SSDDatingModel.FK__ClientInt__inter__17E28260" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

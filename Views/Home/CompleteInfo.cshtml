@@ -1,0 +1,102 @@
+﻿@model WebApplication9.ViewModels.ClientInterestViewModel
+
+@{
+    ViewBag.Title = "CompleteInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert  alert-info alert-dismissible col-md-8 col-md-offset-2" role="alert" style="margin-top:20px!important">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="message-inside">
+            <span>@ViewBag.Message</span> Please try again!
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <h4 class="col-md-offset-2" style="margin-top:50px; padding-left:15px; font-family:'lato'!important;font-weight: 700;
+    color: #1b95e0!important; margin-bottom: 20px; clear:both ">To finish the registration, please complete your profile info</h4>
+    <div class="form-horizontal col-md-8 col-md-offset-2">
+        <div class="form-group col-md-10">
+            <div class="col-md-10">
+               
+            </div>      
+      </div>
+        <div class="completeInfoBody w3-border w3-round w3-padding-large">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.HiddenFor(model => model.email)
+                </div>
+            </div>
+            <div class="form-group col-md-10">
+                    <label>UserName</label><br />
+                    @Html.DisplayFor(model => model.userName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.userName)
+            </div>
+            <div class="form-group col-md-10">             
+                    <label for="male">Male</label>
+                    <input type="radio" name="gender" value="male" id="male" />
+                    <label for="female">Female</label>
+                    <input type="radio" name="gender" value="female" id="female" />
+            </div>
+
+            <div class="form-group col-md-10">
+                <label for="birthDay">Birthdate</label>
+                <input type="date" name="birthdate" class="form-control input-sm" ng-model="birthdate" required />
+            </div>
+
+            <div class="form-group col-md-10">     
+                <input name="country" type="hidden" class="countries" id="countryId" />
+                <input name="province" type="hidden" class="states" id="stateId" />
+                <input name="city" type="hidden" class="states" id="cityId" />
+                <input name="latitude" type="hidden" class="states" id="latitude" />
+                <input name="longitude" type="hidden" class="states" id="longitude" />
+            </div>
+
+            <div class="form-group">
+                    @Html.HiddenFor(model => model.userId)
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <label>Interests</label>  
+                    <div style="padding-left:0px">
+                        <select multiple class="form-control" name="interests">
+                            @{
+                                var counter = 0;
+                            }
+                            @foreach (var x in Model.interests)
+                            {
+                                <option name="interests[@counter]" value="@x">
+                                    @x
+                                </option>
+                                counter++;
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-10" style="margin-top:20px">
+                <input type="submit" value="Save" class="btn btn-info" />
+        </div>
+    </div>
+}
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="http://lab.iamrohit.in/js/location.js"></script>
+<script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+<script src="~/signalr/hubs"></script>
+<script defer src="~/Scripts/app.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+

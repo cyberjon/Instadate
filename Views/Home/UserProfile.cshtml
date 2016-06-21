@@ -1,0 +1,421 @@
+﻿@model WebApplication9.ViewModels.ClientDetailInfo
+
+@{
+    ViewBag.Title = "UserProfile";
+}
+
+@{
+    var date = DateTime.Now.Date.Subtract((DateTime)Model.client.birthdate);
+    int year = (int)date.TotalDays / 365;
+
+}
+
+
+<!-- profile background and profile photo-->
+<div class="col-md-12 profile" style="position:relative">
+    <div class="profileHeaderImg col-md-12 w3-card-2">
+
+        @if (Model.client.profilebackground != null)
+        {
+            <img src="~/Images/profile-cover/@Model.client.profilebackground" style="width:100%" />
+        }
+        else
+        {
+            <img src="~/Images/profile-cover/profile-cover1.jpg" style="width:100%" />
+        }
+
+
+        <div class="w3-container w3-padding-24"></div>
+    </div>
+    <div style="height:200px; width:200px; position:absolute; top: 250px;left: 64px;">
+        @if (Model.client.profile != null)
+        {
+            <img class="img-thumbnail" src="~/Images/Uploads/UserProfile/@Model.client.profile" alt="@Model.client.UserName" style="width:100%;height:100%" />
+        }
+        else if (Model.client.gender == "male")
+        {
+            <img class="img-thumbnail" src="~/Images/Uploads/UserProfile/default-profile-male.jpg" alt="@Model.client.UserName" style="width:100%;height:100%" />
+        }
+        else
+        {
+            <img class="img-thumbnail" src="~/Images/Uploads/UserProfile/default-profile-female.jpg" alt="@Model.client.UserName" style="width:100%;height:100%" />
+        }
+    </div>
+    @if (User.Identity.Name == Model.client.UserName)
+    {
+        <div class="change-background-container" data-toggle="modal" data-target="#show-cover-image-modal"><a class="btn btn-default">Change cover</a></div>
+    }
+
+</div>
+
+<!--profile info area-->
+<div class="col-md-3 w3-margin-64 w3-border w3-round" style="width:200px;">
+    <div>
+        <span class="userName w3-justify" style="text-align:center">@Model.client.UserName </span>
+    </div>
+
+    <div style="margin-top:16px">@Model.client.gender, @year</div>
+    <div style="margin-top:5px">@Model.client.province, @Model.client.country</div>
+    <div style="margin-top:5px">
+        <i class="fa fa-tags"></i>
+        @if (Model.interests != null)
+        {
+            int length = (Model.interests).Count();
+            int counter = 0;
+            foreach (var interest in Model.interests)
+            {
+                counter++;
+                if (interest != null)
+                {
+                    if (counter < length)
+                    {
+                        <span>@interest,</span>
+                    }
+                    else {
+                        <span>@interest</span>
+                    }
+                }
+            }
+        }
+    </div>
+
+    <!--update button -->
+    <div class="w3-margin w3-left">
+        @if (Request.IsAuthenticated && User.Identity.Name == Model.client.UserName)
+        {
+            <a href="#" class="btn btn-info btn-sm update-button" data-toggle="modal" data-target="#updateFormModal"><i class="material-icons">update</i> Update</a>
+        }
+    </div>
+
+    @if (User.Identity.Name != Model.client.UserName)
+    {
+        <!-- start a conversation button-->
+        <a class="btn btn-info start_a_conversation" href="#" link="/home/StartAConversation?receiver=@Model.client.UserName&&sender=@User.Identity.Name" target="@Model.client.UserName">
+            <i class="material-icons">chat</i>Start a conversation
+        </a>
+        <input id="sendTo" value="@Model.client.UserName" style="display:none"><br />
+        <input id="sendFrom" value="@User.Identity.Name" style="display:none" /><br />
+
+        <!--leave a message button-->
+        <a class="btn leave-message-button"><i class="material-icons">create</i> leave a message</a>
+    }
+
+</div>
+
+<!-- show update error-->
+@if (ViewBag.uploadPhotoError != null)
+{
+    <div class="alert  alert-info alert-dismissible col-md-6 col-md-offset-3" role="alert" style="margin-top:20px!important;margin-left: 0px!important;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="message-inside">
+            <span>@ViewBag.uploadPhotoError</span>
+        </div>
+    </div>
+}
+
+
+<!-- update profile area -->
+<div class="modal fade w3-padding w3-padding" tabindex="-1" role="dialog" id="updateFormModal" style="margin:20px!important" ng-app="">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content w3-margin w3-padding">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Update</h4>
+            </div>
+            <div class="modal-body">
+                <form action="~/Home/UserProfile" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    <div class="form-group">
+                        <input type="text" name="client.UserName" value="@Model.client.UserName" class="form-control" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Gender">Gender:</label><br />
+                        @if (Model.client.gender == "male")
+                        {
+                            <label class="radio-inline"><input type="radio" name="client.gender" value="male" checked>Male</label>
+                                <label class="radio-inline"><input type="radio" name="client.gender" value="female">Female</label><br />
+                        }
+                        else
+                        {
+                            <label class="radio-inline"><input type="radio" name="client.gender" value="male">Male</label>
+                                <label class="radio-inline"><input type="radio" name="client.gender" value="female" checked>Female</label><br />
+
+                        }
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="photo">Photo:</label>
+                        <input type="file" name="photo" class="form-control" id="photo" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthDay"></label>
+                        <input type="date" name="client.birthdate" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Location">Location:</label><br />
+                        <select name="country" class="countries" id="countryId">
+                            <option value="">Select Country</option>
+                        </select>
+                        <select name="state" class="states" id="stateId">
+                            <option value="">Select State</option>
+                        </select>
+                        @*<select name="city" class="cities" id="cityId">
+                                <option value="">Select City</option>
+                            </select>*@
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interests">Interests (hold shift to select more than one，you can select 3 interests):</label>
+                        <select multiple class="form-control" id="interests" name="interests[]">
+                            @{
+                                var counter1 = 0;
+                            }
+                            @foreach (var interest in ViewBag.interests)
+                            {
+                                <option name="interests[@counter1]" value="@interest.interest1">@interest.interest1</option>
+                                counter1++;
+                            }
+                        </select>
+                    </div>
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Upload">
+                </form>
+
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--leave message area-->
+@if (!User.IsInRole("PaidUser") && User.Identity.Name == @Model.client.UserName)
+{
+    <div id="upgradeFooter">
+        <p><a class="btn btn-info btn-sm" style="float:right; margin-right:10px; right:0; position:absolute;" href="~/Home/Upgrade">Upgrade</a></p>
+    </div>
+}
+
+<div class="leave-message-container col-xs-8" style="display:none">
+    <form style="position:relative" method="post" action="~/home/LeaveMessage">
+        <div class="form-group col-xs-12 commentBox">
+            <div class="commentBoxOuter">
+                <div class="commentP"><span class="leave-message-header"><i class="fa fa-pencil"></i> Leave message</span></div>
+                <div class="col-xs-1">
+                    @{
+                        SSDDatingEntities21 context = new SSDDatingEntities21();
+                        var profile = (context.Clients.Find(User.Identity.Name)).profile;
+                        if (profile != null)
+                        {
+                            <img src="~/Images/Uploads/UserProfile/@profile" />
+                        }
+                        else
+                        {
+                            <i class="material-icons commentIcon">person</i>
+                        }
+                    }
+
+                </div>
+
+                <div class="col-xs-11" rows="4" cols="50" id="commentBoxInside">
+                    <input type="text" name="messageSender" value="@User.Identity.Name" style="display:none" />
+                    <input type="text" name="messageReceiver" value="@Model.client.UserName" style="display:none" />
+                    <textarea class="form-control commentHightChange" rows="5" id="message" name="message" placeholder="Leave your comment...." required></textarea>
+                </div>
+            </div>
+
+            <div class="col-xs-7 col-xs-offset-1 message-button-group">
+                <button class="btn btn-default btn-sm cancelButton" type="reset">Cancel</button>
+                <button class="btn btn-primary btn-sm" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- show upload user activity images error-->
+@if (TempData["uploadActivityError"] != null)
+{
+    <div class="alert alert-warning alert-dismissible col-xs-8 uploadActivityError" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Warning!</strong> @TempData["uploadActivityError"].
+    </div>
+}
+
+@if (Model.client.UserName == User.Identity.Name)
+{
+    <!-- upload user activity images area-->
+    <div class="col-xs-8 user-activity-images-container">
+        <div class="user-activity-images-header">What is new with you? <span> @string.Format("{0:yyyy-MM-dd}", DateTime.Now)</span></div>
+        <form class="form-horizontal" method="post" action="/home/postActivityImages" enctype="multipart/form-data">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="username" value="@User.Identity.Name" style="display:none">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Title" name="title" required>
+                    <div class="input-group-addon camera-button" style="cursor:pointer"><i class="fa fa-camera-retro"></i></div>
+                </div>
+            </div>
+            <div id="upload-submit" style="display:none">
+                <div class="form-group">
+                    <input type="file" name="files" multiple id="uploadImages" required>
+                    <p class="help-block">You can upload 4 images at one time.</p>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-info btn-sm uploadImages-button"><span class="glyphicon glyphicon-upload"></span>&nbsp;Upload</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+}
+
+<!--load user activity images view page-->
+<div class="load-messages-and-images-area col-xs-12 col-sm-8 col-md-8">
+    <div id="loadImages">
+        @{
+            Html.RenderAction("loadUserActivityImages", new { UserNam = Model.client.UserName });
+        }
+    </div>
+
+
+
+    <!-- load message partial view page-->
+    <div id="loadMessage">
+        @{
+            Boolean checkViewer = false;
+            if (Model.client.UserName == User.Identity.Name)
+            {
+                checkViewer = true;
+            }
+            Html.RenderAction("loadMessages", new { receiver = Model.client.UserName, sender = User.Identity.Name, checkViewer = checkViewer });
+        }
+    </div>
+</div>
+
+<!-- change cover modal-->
+<!-- Modal -->
+<div id="show-cover-image-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog  modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4>Change cover</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-xs-3 per-cover-img-container">
+                    <img class="img-responsive img-cover-in-modal" src="~/Images/profile-cover/profile-cover1.jpg" />
+                    <a href="~/home/changecover?Username=@User.Identity.Name&&ImageName=profile-cover1.jpg"><i class="material-icons">check_circle</i></a>
+                </div>
+
+                <div class="col-xs-3 per-cover-img-container">
+                    <img class="img-responsive img-cover-in-modal" src="~/Images/profile-cover/profile-cover2.jpg" />
+                    <a href="~/home/changecover?Username=@User.Identity.Name&&ImageName=profile-cover2.jpg"><i class="material-icons">check_circle</i></a>
+                </div>
+
+                <div class="col-xs-3 per-cover-img-container" style="margin-bottom:50px">
+                    <img class="img-responsive img-cover-in-modal" src="~/Images/profile-cover/profile-cover3.jpg" />
+                    <a href="~/home/changecover?Username=@User.Identity.Name&&ImageName=profile-cover3.jpg"><i class="material-icons">check_circle</i></a>
+                </div>
+
+                <div class="col-xs-3 per-cover-img-container">
+                    <img class="img-responsive img-cover-in-modal" src="~/Images/profile-cover/profile-cover4.jpg" />
+                    <a href="~/home/changecover?Username=@User.Identity.Name&&ImageName=profile-cover4.jpg"><i class="material-icons">check_circle</i></a>
+                </div>
+
+                <div class="col-xs-3 per-cover-img-container">
+                    <img class="img-responsive img-cover-in-modal" src="~/Images/profile-cover/profile-cover5.jpg" />
+                    <a href="~/home/changecover?Username=@User.Identity.Name&&ImageName=profile-cover5.jpg"><i class="material-icons">check_circle</i></a>
+                </div>
+
+                <div class="col-xs-3 per-cover-img-container">
+                    <img class="img-responsive img-cover-in-modal" src="~/Images/profile-cover/profile-cover6.jpg" />
+                    <a href="~/home/changecover?Username=@User.Identity.Name&&ImageName=profile-cover6.jpg"><i class="material-icons">check_circle</i></a>
+                </div>
+
+                <div class="col-xs-3 per-cover-img-container">
+                    <img class="img-responsive img-cover-in-modal" src="~/Images/profile-cover/profile-cover7.jpg" />
+                    <a href="~/home/changecover?Username=@User.Identity.Name&&ImageName=profile-cover7.jpg"><i class="material-icons">check_circle</i></a>
+                </div>
+
+                <div class="col-xs-3 per-cover-img-container">
+                    <img class="img-responsive img-cover-in-modal" src="~/Images/profile-cover/profile-cover8.jpg" />
+                    <a href="~/home/changecover?Username=@User.Identity.Name&&ImageName=profile-cover8.jpg"><i class="material-icons">check_circle</i></a>
+                </div>
+
+            </div>
+            <div class="modal-footer change-cover-modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<script>
+        $(document).ready(function () {
+            $("#myBtn").click(function () {
+                $("#myModal").modal();
+            });
+        });
+        $('.leave-message-button').click(function () {
+            $(".leave-message-container").toggle(500);
+
+        });
+
+
+        $('.camera-button').click(function () {
+            $("#upload-submit").toggle(500);
+
+        });
+
+        //check upload images number
+        $(".uploadImages-button").click(function () {
+            var uploadImageNumber = $("#uploadImages").get(0).files.length;
+            if (uploadImageNumber > 4 || uploadImageNumber == 0) {
+                if (uploadImageNumber == 0) {
+                    alert("Please upload at least one image.");
+                } else {
+                    alert("Sorry, you can only upload 4 images one time");
+                }
+
+                return false;
+            }
+        });
+
+        //change image opactiy in modal
+        $(".per-cover-img-container").hover(function () {
+            $(this).find("img").fadeTo(500, 0.4);
+            $(this).find("i").show(1000);
+
+        }).mouseleave(function () {
+            $(this).find("img").fadeTo(500, 1);
+            $(this).find("i").hide(500);
+        });
+
+        //show change cover button when hover
+        $(".profile").hover(function () {
+            $(".change-background-container").show(500);
+        }).mouseleave(
+        function () {
+            $(".change-background-container").hide(500);
+        }
+        );
+
+
+
+</script>
+<script src="http://lab.iamrohit.in/js/location.js"></script>
+<script src="~/Scripts/SignalR-startAConversation.js"></script>

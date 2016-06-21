@@ -1,0 +1,74 @@
+﻿@model WebApplication9.ViewModels.Login
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+        <div id="index" class="col-md-12">
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert  alert-info alert-dismissible col-md-8 col-md-offset-2" role="alert" style="margin-top:20px!important">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="message-inside">
+            <span>@TempData["Message"]</span>
+        </div>
+    </div>
+}
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info alert-dismissible col-md-8 col-md-offset-2 message" role="alert" style="margin-top:20px!important">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="message-inside">
+            <span>@ViewBag.Message</span>
+        </div>
+    </div>
+}
+
+            @using (Html.BeginForm())
+            {
+
+                <div class="col-md-3 col-md-offset-7 col-sm-4 col-sm-offset-7 col-xs-6 col-xs-offset-6 loginBox">
+                    <div class="login-wrapper col-md-12">
+                        <h1 style="font-family: 'Lobster Two';">Log in to InstaDate</h1>
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control input-sm", @placeholder = "Username" } })
+                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control input-sm", @placeholder = "Password" } })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                               </div>                             
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <input type="submit" value="Log in" class="btn btn-info btn-sm" style="margin-right:10px"/>
+                                    <span><a href="~/Home/ForgotPassword" style="color:#1b95e0!important;">Forget password?</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+
+        </div>
+
+
+
+
+
+
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

@@ -1,0 +1,63 @@
+    -- Create a database named DatingDB and use this script to build it.
+	DROP TABLE Available;
+    DROP TABLE ClientInterest;
+	DROP TABLE Client;
+    DROP TABLE Interest;
+    GO
+
+
+    GO
+    CREATE TABLE Client(	
+    email NVARCHAR(256),
+    UserName NVARCHAR(256) PRIMARY KEY,
+    birthdate DATE,
+    gender VARCHAR(20),
+    city VARCHAR(20),
+    province VARCHAR(20),
+    country VARCHAR(20), 
+    availableDate DATE NULL,
+    CHECK(  gender IN ('male', 'female')),
+	FOREIGN KEY (userName) REFERENCES AspNetUsers(UserName)
+    );
+    GO
+    
+
+
+    CREATE TABLE Available( 
+    availableDate DATE NULL,
+    timeStart TIME NULL,
+    UserName NVARCHAR(256) PRIMARY KEY,
+    FOREIGN KEY (userName) REFERENCES Client(UserName)
+    );
+    GO
+
+
+    CREATE TABLE Interest
+    (
+    interest VARCHAR (20),
+    PRIMARY KEY(interest)
+    )
+	INSERT INTO Interest(interest) VALUES ('1')
+INSERT INTO Interest(interest) VALUES ('2')
+INSERT INTO Interest(interest) VALUES ('3')
+INSERT INTO Interest(interest) VALUES ('4')
+INSERT INTO Interest(interest) VALUES ('5')
+INSERT INTO Interest(interest) VALUES ('6')
+    GO
+
+    CREATE TABLE ClientInterest
+    (
+    UserName NVARCHAR(256),
+    interest VARCHAR(20) FOREIGN KEY REFERENCES Interest(interest),
+	FOREIGN KEY (UserName) REFERENCES AspNetUsers(UserName), 
+	PRIMARY KEY (UserName, interest)
+    )
+
+    
+    GO
+
+    SELECT * FROM Client;
+    SELECT * FROM Interest;
+    SELECT * FROM ClientInterest;
+	SELECT * FROM Available;
+    GO

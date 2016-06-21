@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - InstaDate</title>
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="~/CSS/bootstrap.css">
+    <link rel="stylesheet" href="~/CSS/Instadate.css">
+
+    <link href="~/CSS/customizecarousel.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="//js.pusher.com/3.0/pusher.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script>
+        var pusher = new Pusher('YOUR_APP_KEY');
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function (data) {
+            alert('An event was triggered with message: ' + data.message);
+        });
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="~/Home/Square?UserName=@User.Identity.Name">InstaDate</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+               
+                    <li><a href="~/Home/About"><i class="fa fa-info-circle"></i> About</a></li>
+          
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="square-link"><a href="~/Home/Square/?UserName=@User.Identity.Name"><i class="material-icons">people</i> Square</a></li>
+                        <li><a href="~/Home/findADate?username=@User.Identity.Name"><i class="fa fa-search"></i> Find a date</a></li>
+
+                      
+                    }
+                    
+                    <li><a href="~/Home/prototype">Documentation &nbsp;2016-04-07 2:38 PM</a></li>
+                    <li><a href="~/Instadate_Api.html">Instadate Api</a></li>
+                </ul>
+               
+                <ul class="nav navbar-nav navbar-right">
+                    @if (!Request.IsAuthenticated)
+                    {
+                        <li><a href="~/Home/Register">SIGN UP</a></li>
+                        <li><a href="~/Home/Index">LOG IN</a></li>
+
+                    }
+                    else
+                    {
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+                               aria-haspopup="true" aria-expanded="false" id="alert-center"><i class="fa fa-bell" id="fa-bell"></i>
+                            </a>
+                            <ul class="dropdown-menu alertCenter">
+                                <li><a href="#" class="alterCenterHeader">Alert Center</a></li>
+                            </ul>
+                        </li>
+                    <li>
+                        @{
+                            SSDDatingEntities21 context = new SSDDatingEntities21();
+                            var profile = (context.Clients.Find(User.Identity.Name)).profile;
+                            if (profile != null)
+                            {
+                                <a class="nav-profile-link" href="~/Home/UserProfile?userName=@User.Identity.Name"><img class="nav-profile-img" src="~/Images/Uploads/UserProfile/@profile" /></a>
+                            }
+                            else
+                            {
+                                <a class="nav-profile-link" href="~/Home/UserProfile?userName=@User.Identity.Name">
+                                    <i class="material-icons nav-profile-icon">person</i>
+                                </a>
+                            }
+                        }
+                    </li>
+
+                       <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+                               aria-haspopup="true" aria-expanded="false">@User.Identity.Name 
+                           
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                    <li><a href="~/Home/UserProfile?userName=@User.Identity.Name">Profile</a></li>
+                                @if(User.IsInRole("Admin"))
+                                {
+                                    <li><a href="~/Home/AddRole">Add Role</a></li>
+                                    <li><a href="~/Home/AddUserToRole">Add use to role</a></li>
+                                }
+
+                                    <li><a href="~/Home/Logout">Logout</a></li>
+                            </ul>
+                        </li>
+
+                                    }                   
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      
+    </nav>
+
+
+        @RenderBody()
+    
+    <footer class="col-xs-12">
+        
+        <p>Copayright &copy; @DateTime.Now.Year &nbsp; Instadate Inc. All rights reserved.</p>
+    </footer>
+    <script src="http://lab.iamrohit.in/js/location.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/SignalR-Global.js"></script>
+</body>
+</html>

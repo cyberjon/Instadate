@@ -1,0 +1,12 @@
+#Software: Microsoft Internet Information Services 8.0
+#Version: 1.0
+#Date: 2016-03-16 16:36:43
+#Fields: date time s-sitename s-computername s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) cs-host sc-status sc-substatus sc-win32-status sc-bytes cs-bytes time-taken
+2016-03-16 16:36:42 W3SVC4892 BROWN 143.95.251.3 GET / - 80 - 24.86.165.102 Mozilla/5.0+(Windows+NT+10.0;+WOW64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/49.0.2623.87+Safari/537.36 - note-to-myself.zaichaopan.com 403 14 0 1393 417 1812
+2016-03-16 16:36:42 W3SVC4892 BROWN 143.95.251.3 GET /favicon.ico - 80 - 24.86.165.102 Mozilla/5.0+(Windows+NT+10.0;+WOW64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/49.0.2623.87+Safari/537.36 http://note-to-myself.zaichaopan.com/ note-to-myself.zaichaopan.com 404 0 2 1405 375 343
+2016-03-16 16:36:54 W3SVC4892 BROWN 143.95.251.3 GET /public - 80 - 24.86.165.102 Mozilla/5.0+(Windows+NT+10.0;+WOW64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/49.0.2623.87+Safari/537.36 - note-to-myself.zaichaopan.com 301 0 0 405 423 93
+2016-03-16 16:36:54 W3SVC4892 BROWN 143.95.251.3 GET /public/ - 80 - 24.86.165.102 Mozilla/5.0+(Windows+NT+10.0;+WOW64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/49.0.2623.87+Safari/537.36 - note-to-myself.zaichaopan.com 200 0 0 399 424 249
+2016-03-16 16:37:04 W3SVC4892 BROWN 143.95.251.3 GET /public/views - 80 - 24.86.165.102 Mozilla/5.0+(Windows+NT+10.0;+WOW64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/49.0.2623.87+Safari/537.36 - note-to-myself.zaichaopan.com 200 0 0 399 429 124
+2016-03-16 16:37:08 W3SVC4892 BROWN 143.95.251.3 GET /public/views/register - 80 - 24.86.165.102 Mozilla/5.0+(Windows+NT+10.0;+WOW64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/49.0.2623.87+Safari/537.36 - note-to-myself.zaichaopan.com 200 0 0 399 438 156
+2016-03-16 16:37:26 W3SVC4892 BROWN 143.95.251.3 GET /register - 80 - 24.86.165.102 Mozilla/5.0+(Windows+NT+10.0;+WOW64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/49.0.2623.87+Safari/537.36 - note-to-myself.zaichaopan.com 404 0 2 1405 425 140
+2016-03-16 16:38:23 W3SVC4892 BROWN 143.95.251.3 GET / - 80 - 24.86.165.102 Mozilla/5.0+(Windows+NT+10.0;+WOW64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/49.0.2623.87+Safari/537.36 - note-to-myself.zaichaopan.com 403 14 0 1393 417 140

@@ -1,0 +1,93 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<WebApplication9.UserMessage>
+
+
+@if (ViewBag.number != 0)
+{
+    int count = 1;
+    <div class="col-xs-12">
+        <div class="col-xs-12 view-messages-container-header"><spa>Messages</spa></div>
+        <div class="col-xs-12 view-messages-container">
+
+            @foreach (var item in Model)
+            {
+                <div class="col-xs-12 view-per-message-container">
+                    <div class="col-xs-3 view-per-message-sender">
+                        @if (User.Identity.Name == item.receiver && count <= ViewBag.newMessages)
+                        {
+                            <span class="label label-default">New</span>
+                            count++;
+                        }
+
+
+                        @item.sender
+                    </div>
+                    <div class="col-xs-3 col-xs-offset-6 view-per-message-post-time">@item.DateCreated</div>
+                    <div class="col-xs-1">
+                        @if (item.senderProfile != null)
+                    {
+                            <img src="~/Images/Uploads/UserProfile/@item.senderProfile" />
+                        }
+                        else {
+                            <i class="material-icons commentIcon">person</i>
+                        }
+                    </div>
+                    <div class="col-xs-11 view-messages-body">@item.messageBody</div>
+
+                    @if (User.Identity.Name == item.receiver)
+                    {
+                        <div class="col-xs-1 col-xs-offset-11 view-per-message-delete">
+                            <a href="~/home/deleteLeaveMessage/?userName=@User.Identity.Name&&Id=@item.Id"><i class="fa fa-trash-o"></i></a>
+                        </div>
+                    }
+                </div>
+            }
+
+
+        </div>
+
+        <div id="view-message-per-page" class="col-xs-8">
+            @Html.PagedListPager(
+        Model,
+        page => Url.Action(
+            "loadMessages",
+            new
+            {
+                receiver = ViewBag.receiver,
+                sender = ViewBag.sender,
+                checkViewer = ViewBag.checkViewer,
+                page = page
+            }
+        ),
+        new PagedListRenderOptions
+        {
+            LinkToFirstPageFormat = "<<",
+            LinkToPreviousPageFormat = "prev",
+            LinkToNextPageFormat = "next",
+            LinkToLastPageFormat = ">>",
+        }
+    )
+        </div>
+    </div>
+}
+
+
+
+<script>
+    $(function () {
+        $('#view-message-per-page a').on('click', function () {
+            $.ajax({
+                url: this.href,
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $('#loadMessage').html(result);
+                }
+            });
+            return false;
+        });
+
+    });
+
+
+</script>

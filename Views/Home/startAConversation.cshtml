@@ -1,0 +1,73 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>StartAConversation</title>
+    <style>
+
+    </style>
+    <link rel="stylesheet" href="~/CSS/bootstrap.css">
+    <link href="~/CSS/start-talk-room.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="//js.pusher.com/3.0/pusher.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+</head>
+<body>
+    <div class="live -chat-header">
+        <div class="title">Live chat: </div>
+        <ul>
+            <li><i class="fa fa-user"></i> @ViewBag.receiver</li>
+            <li><i class="fa fa-user"></i> @User.Identity.Name</li>
+        </ul>
+    </div>
+
+    <div class="col-xs-12 chat-room-body">
+        <input id="sendTo" value="@ViewBag.receiver" style="display:none"><br />
+        <input id="sendFrom" value="@User.Identity.Name" style="display:none" /><br />
+        <div class="conversation-outer-container col-xs-12">
+            <p><i class="fa fa-bullhorn"></i> waiting for @ViewBag.receiver accept <span class="wait-animation"><span class="start">...</span></span></p>
+            <ul id="conversation-container"></ul>
+        </div>
+        <button class="col-xs-1 emoji emoji-button"><i class="material-icons">sentiment_satisfied</i></button>    
+       <!-- <textarea id="instant-message" class="col-xs-8"></textarea>-->
+        <div class="col-xs-8 inputDiv" contenteditable="true"></div>
+    <button id="sendMessage" class="col-xs-3"><i class="fa fa-lock"></i><i class="fa fa-unlock hidden"></i>Send</button>
+    </div>
+    
+        <div id="emoji-container">
+            <img class="emoji-face" src="~/Images/emoji/emoji-1.png"/>
+            <img class="emoji-face" src="~/Images/emoji/emoji-2.png" />
+            <img class="emoji-face" src="~/Images/emoji/emoji-3.png" />
+            <img class="emoji-face" src="~/Images/emoji/emoji-4.png" />
+            <img class="emoji-face" src="~/Images/emoji/emoji-5.png" />
+            <img class="emoji-face" src="~/Images/emoji/emoji-6.png" />
+            <img class="emoji-face" src="~/Images/emoji/emoji-7.png" />
+            <img class="emoji-face" src="~/Images/emoji/emoji-8.png" />
+            <img class="emoji-face" src="~/Images/emoji/emoji-9.png" />
+            <img class="emoji-face" src="~/Images/emoji/emoji-10.png" />
+            <img class="emoji-face" src="~/Images/emoji/emoji-11.png" />
+            <img class="emoji-face" src="~/Images/emoji/emoji-12.png" />
+            <img class="emoji-face" src="~/Images/emoji/emoji-13.png" />        
+        </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/SignalR-informAccept-talk.js"></script>
+
+</body>
+</html>
+
